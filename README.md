@@ -136,17 +136,17 @@ console.log("running on http://0.0.0.0:8080");
 ```
 
 ## Comandos DOCKER
->- Construir el contenedor 
+>- Construir el contenedor (gcr.io/[nombre_proyecto]/[nombre_contenedo_repo])
 ```console
 docker build -t gcr.io/intermediafinal/node-mi-app .
 ```
->- Agregar el contenedor a la direccion
+>- Agregar el contenedor a la direccion (gcr.io/[nombre_proyecto]/[nombre_contenedor_repo])
 ```console
 docker push gcr.io/intermediafinal/node-mi-app 
 ```
->- Actualizar informacion
+>- Actualizar informacion (gcr.io/[nombre_proyecto]/[nombre_contenedor_repo])
 ```console
-docker pull gcr.io/intermediafinal/nodeapps
+docker pull gcr.io/intermediafinal/node-mi-app
 ```
 >- Crear un despliegue de kubernetes, crear un deployment conjunto de instrucciones que tiene un contenedor para que este en un pod  
 ```console
@@ -191,4 +191,51 @@ kubectl apply -f service-node.yaml
 ```console
 kubectl apply -f basic-ingress.yaml
 ```
+# MONITOREO
+## Grafana y Prometheus
 
+#### Prometheus Operator for Kubernetes
+
+Un operador de Kubernetes es un método para empaquetar, implementar y gestionar un aplicación de esta plataforma, que se implementa ahí mismo y se administra con la interfaz de programación de aplicaciones (API) de kubernetes y la herramienta kubectl
+
+##### Arquitectura de Prometheus 
+Prometheus se compone de múltiples componentes si bien estos son los principales para el caso de uso definido previamente:
+
+>- Prometheus server: Es el componente encargado de recolectar y almacenar las métricas de los aplicativos en una time series database.
+>- Service discovery: Prometheus dispone de conectores con los principales Service Discovery del mercado pudiendo auto descubrir y desechar aplicaciones de forma automática en tiempo real, algo fundamental cuando se trabaja con contenedores que cambian de IP constantemente.
+>- Client libraries: Son las librerías encargadas de exponer las métricas internas de la aplicación a monitorizar en formato Prometheus (CPU, Memoria, Threads, GC…), para que puedan ser recolectadas por el Prometheus server.
+>- Alert manager: Es el componente encargado de gestionar las alertas enviadas por el Prometheus server. Es decir, agrupa y notifica las alarmas por los distintos medios definidos como correo electrónico, PagerDuty u OpsGenie entre otros. También se encarga de silenciar e inhibir las alertas.
+>>>
+![image](https://user-images.githubusercontent.com/36779113/143400826-eac60b25-1602-418b-8267-23789ae81ddb.png)
+
+##### Implementacion
+> 1. Descargar el repositorio
+```git
+git clone https://github.com/prometheus-operator/kube-prometheus
+```
+> 2. Ingresamos a la carpeta del repositorio
+```console
+cd kube-prometheus
+```
+> Aplicamos la pila de kube-prometheus 
+The previous steps (compilation) has created a bunch of manifest files in the manifest/ folder. Now simply use kubectl to install Prometheus and Grafana as per your configuration:
+
+```console
+# Update the namespace and CRDs, and then wait for them to be available before creating the remaining resources
+$ kubectl apply -f manifests/setup
+$ kubectl apply -f manifests/
+```
+
+> Obtener todos los pods 
+```console
+kubectl get all -n monitoring
+```
+![image](https://user-images.githubusercontent.com/36779113/143404562-efa0ce09-cda7-4c81-a072-b7d1a43fbacc.png)
+![image](https://user-images.githubusercontent.com/36779113/143404766-f732374c-9a70-4b35-9682-5812761b1567.png)
+
+> Exponer en puerto 9090 prometheus
+![image](https://user-images.githubusercontent.com/36779113/143405235-1cb5dc93-4c3d-45be-821b-d922796e4c42.png)
+
+> Exponer en puerto 3000 graphana
+![image](https://user-images.githubusercontent.com/36779113/143405332-bcb386fb-152c-4608-b170-a0e5a3be295c.png)
+![image](https://user-images.githubusercontent.com/36779113/143405499-e75908e9-2358-4573-85ac-f724f8245ad6.png)
