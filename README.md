@@ -138,7 +138,7 @@ console.log("running on http://0.0.0.0:8080");
 ## Comandos DOCKER
 >- Construir el contenedor 
 ```console
-docker build -t gcr.io/intermediafinal/node-mi-app  
+docker build -t gcr.io/intermediafinal/node-mi-app .
 ```
 >- Agregar el contenedor a la direccion
 ```console
