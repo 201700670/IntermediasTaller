@@ -274,8 +274,8 @@ The previous steps (compilation) has created a bunch of manifest files in the ma
 
 ```console
 # Update the namespace and CRDs, and then wait for them to be available before creating the remaining resources
-$ kubectl apply -f manifests/setup
-$ kubectl apply -f manifests/
+$ kubectl create -f manifests/setup
+$ kubectl create -f manifests/
 ```
 
 > Obtener todos los pods 
