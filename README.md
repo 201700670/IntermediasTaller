@@ -286,8 +286,17 @@ kubectl get all -n monitoring
 ![image](https://user-images.githubusercontent.com/36779113/143404766-f732374c-9a70-4b35-9682-5812761b1567.png)
 
 > Exponer en puerto 9090 prometheus
+```console
+kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
+```
 ![image](https://user-images.githubusercontent.com/36779113/143405235-1cb5dc93-4c3d-45be-821b-d922796e4c42.png)
 
 > Exponer en puerto 3000 graphana
+```console
+kubectl --namespace monitoring port-foward svc/alertmanager-main 9093
+```
+```console
+kubectl --namespace monitoring port-forward svc/grafana 3000
+```
 ![image](https://user-images.githubusercontent.com/36779113/143405332-bcb386fb-152c-4608-b170-a0e5a3be295c.png)
 ![image](https://user-images.githubusercontent.com/36779113/143405499-e75908e9-2358-4573-85ac-f724f8245ad6.png)
