@@ -263,7 +263,7 @@ Prometheus se compone de múltiples componentes si bien estos son los principale
 ##### Implementacion
 > 1. Descargar el repositorio
 ```git
-git clone https://github.com/prometheus-operator/kube-prometheus
+git clone https://github.com/prometheus-operator/kube-prometheus.git
 ```
 > 2. Ingresamos a la carpeta del repositorio
 ```console
@@ -293,7 +293,7 @@ kubectl --namespace monitoring port-forward svc/prometheus-k8s 9090
 
 > Exponer en puerto 3000 graphana
 ```console
-kubectl --namespace monitoring port-foward svc/alertmanager-main 9093
+kubectl --namespace monitoring port-forward svc/alertmanager-main 9093
 ```
 ```console
 kubectl --namespace monitoring port-forward svc/grafana 3000
