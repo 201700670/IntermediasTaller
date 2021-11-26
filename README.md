@@ -61,7 +61,7 @@ spec:                           # Especificaciones del despliegue
         - containerPort: 8080   # puerto 80
 ```
 
-> - - basic-ingress.yaml
+> - - nano basic-ingress.yaml
 ```console
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -73,7 +73,7 @@ spec:
     servicePort: 8080
 ```
 
-> - - service-node.yaml
+> - - nano service-node.yaml
 ```console
 apiVersion: v1
 kind: Service
@@ -112,11 +112,65 @@ ENTRYPOINT node index.js
 const express= require('express');
 const app= express();
 app.get('/',(req,res)=>{
-	res.send('Hello World');
+    
+	res.send('<html data-ng-app="">\
+    <head>\
+        <title>Using AngularJS Directives and Data Binding</title>\
+        <meta charset="UTF-8">\
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">\
+        <script language="JavaScript" type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>\
+    </head>\
+    <body>\
+        <script src="angular.min.js"></script>\
+    <style>\
+    html {\
+      background-image: url(\'https://www.muycomputerpro.com/wp-content/uploads/2018/08/kubernetes.jpg\');\
+      background-repeat: no-repeat;\
+      background-position-x: 60%;\
+    background-size: cover;\
+    }\
+    </style><h1 style="color: black">Welcome to the Kubernetes</h1><br>\
+    <h1 style="color: black">KCD 2021 students conference</h1>\
+    <script>\
+            $.ajax(\'http://jsonplaceholder.typicode.com/users\', {\
+                method: \'GET\'\
+            }).then(function(data) {\
+                console.log(data);\
+                let response = `<table>\
+                <tr>\
+                   <th rowspan="2">ID</th>\
+                   <th rowspan="2">Name</th>\
+                   <th rowspan="2">User Name</th>\
+                   <th rowspan="2">Email</th>\
+                   <th colspan="3">Address</th></tr>\
+                <tr>\
+                  <th>Street</th>\
+                   <th>Suite</th>\
+                   <th>City</th>\
+                </tr>`;\
+                for (let i = 0; i < data.length; i++) {\
+                    response +=\
+                    `<tr ng-repeat = "user in users">\
+                       <td>${data[i].id}</td>\
+                       <td>${data[i].name}</td>\
+                       <td>${data[i].username}</td>\
+                       <td>${data[i].email}</td>\
+                       <td>${data[i].address.street}</td>\
+                       <td>${data[i].address.suite}</td>\
+                       <td>${data[i].address.city}</td>\
+                    </tr>`\
+                }\
+                document.getElementById(\'container\').innerHTML = response+`</table>`;\
+            });\
+        </script>\
+        <div id="container"></div>\
+        </body>\
+</html>');
 });
 
 app.listen(8080, '0.0.0.0');
 console.log("running on http://0.0.0.0:8080");
+
 ```
 >- nano package.json
 ```json
