@@ -129,24 +129,23 @@ app.get('/',(req,res)=>{
       background-position-x: 60%;\
     background-size: cover;\
     }\
-    </style><h1 style="color: black">Welcome to the Kubernetes</h1><br>\
-    <h1 style="color: black">KCD 2021 students conference</h1>\
+    </style><br><br><h1 style="text-align:center; color: black;">Welcome to the Kubernetes KCD 2021 students conference</h1>\
     <script>\
             $.ajax(\'http://jsonplaceholder.typicode.com/users\', {\
                 method: \'GET\'\
             }).then(function(data) {\
                 console.log(data);\
-                let response = `<table>\
+                let response = `<br><br><br><br><br><div style="text-align:center;"><table style="margin: 0 auto;" border="1" >\
                 <tr>\
-                   <th rowspan="2">ID</th>\
-                   <th rowspan="2">Name</th>\
-                   <th rowspan="2">User Name</th>\
-                   <th rowspan="2">Email</th>\
-                   <th colspan="3">Address</th></tr>\
+                   <th bgcolor="blue" rowspan="2">ID</th>\
+                   <th bgcolor="blue" rowspan="2">Name</th>\
+                   <th bgcolor="blue" rowspan="2">User Name</th>\
+                   <th bgcolor="blue" rowspan="2">Email</th>\
+                   <th bgcolor="blue" colspan="3">Address</th></tr>\
                 <tr>\
-                  <th>Street</th>\
-                   <th>Suite</th>\
-                   <th>City</th>\
+                  <th bgcolor="blue" >Street</th>\
+                   <th bgcolor="blue" >Suite</th>\
+                   <th bgcolor="blue" >City</th>\
                 </tr>`;\
                 for (let i = 0; i < data.length; i++) {\
                     response +=\
@@ -160,7 +159,7 @@ app.get('/',(req,res)=>{
                        <td>${data[i].address.city}</td>\
                     </tr>`\
                 }\
-                document.getElementById(\'container\').innerHTML = response+`</table>`;\
+                document.getElementById(\'container\').innerHTML = response+`</table></div>`;\
             });\
         </script>\
         <div id="container"></div>\
@@ -170,7 +169,6 @@ app.get('/',(req,res)=>{
 
 app.listen(8080, '0.0.0.0');
 console.log("running on http://0.0.0.0:8080");
-
 ```
 >- nano package.json
 ```json
@@ -179,9 +177,9 @@ console.log("running on http://0.0.0.0:8080");
 	"version": "1.0.0",
 	"description": "Node.js on Docker",
 	"author": "First Last <first.last@example.com>",
-	"main": "server.js",
+	"main": "index.js",
 	"scripts": {
-		"start": "node server.js"
+		"start": "node index.js"
 	},
 	"dependencies": {
 		"express": "^4.17.1"
